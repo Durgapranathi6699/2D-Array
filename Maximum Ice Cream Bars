@@ -1,0 +1,20 @@
+class Solution {
+    public int maxIceCream(int[] costs, int coins) {
+        Arrays.sort(costs);
+        int i=0;
+        int ans=0;
+        while(coins!=0 && i<costs.length){
+            if(costs[i]<=coins){
+                coins=coins-costs[i];
+               ans++;
+               i++;
+            }else{//coins are not sufficient
+                break;
+            }
+        }
+        return ans;
+    }
+}
+//as we have to choose more no.of ice-creams 
+//sort costs in increasing order so that we can choose lowest price ice-cream 1 st
+//choose till coins becomes 0
