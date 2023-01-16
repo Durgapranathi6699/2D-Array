@@ -1,0 +1,29 @@
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> ans=new ArrayList<>();
+        for(int interval[]:intervals){
+
+            //case 1:if interval end element < newinterval start index
+
+          if (interval[1] < newInterval[0]) {
+                ans.add(interval);
+
+            //case 2: interval start index > newinterval end index
+                //if newinterval is smaller
+
+            } else if (interval[0] > newInterval[1]) {
+                ans.add(newInterval); 
+                newInterval = interval; 
+
+            } else {
+                
+                //overlapping condition
+               
+                newInterval[0] = Math.min(newInterval[0], interval[0]);
+                newInterval[1] = Math.max(newInterval[1], interval[1]);
+            }
+        }
+        ans.add(newInterval);
+        return ans.toArray(new int[ans.size()][2]);
+    }
+}
