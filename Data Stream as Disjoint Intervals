@@ -1,0 +1,35 @@
+class SummaryRanges {
+
+Set<Integer> tset;
+
+    public SummaryRanges() {
+       tset=new TreeSet<>(); 
+       //will store values in a sorted way
+    }
+    
+    public void addNum(int value) {
+        tset.add(value);
+    }
+    
+    public int[][] getIntervals() {
+        List<int[]> ans=new ArrayList<>();
+        for(int val:tset){
+            //traverse in treeset
+            int n=ans.size();
+            if(n>0 && ans.get(n-1)[1]+1==val){
+                //if there a continuous set 
+                //ex:1,2
+                //intially it will be (1,1) now last one is replaced with 2  as 1+1 is 2
+               ans.get(n-1)[1]=val;
+            }else{
+                //if there is no continuous set of values 
+                //as ex:1,3
+                //add (1,1) (3,3)
+              ans.add(new int[]{val,val});
+            }
+
+        }
+        //convert into array of array
+        return ans.toArray(new int[ans.size()][]);
+    }
+}
